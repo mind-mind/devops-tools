@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CIDR Conflict Checker</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+<h1>VPC CIDR Conflict Checker</h1>
+
+<div class="top-nav">
+    <a href="../index.html">← Back to Tools</a>
+</div>
+
+<label>Existing CIDR</label>
+<input type="text" id="cidr1" placeholder="10.0.0.0/16">
+
+<label>New CIDR</label>
+<input type="text" id="cidr2" placeholder="10.1.0.0/16">
+
+<button onclick="checkOverlap()">Check Conflict</button>
+
+<pre id="output"></pre>
+</div>
+
+<script>
+function ipToNumber(ip) {
+  return ip.split('.').reduce((acc, oct) => (acc << 8) + parseInt(oct), 0) >>> 0;
+}
+
+function cidrToRange(cidr) {
+  const [ip, prefix] = cidr.split('/');
+  const mask = 32 - parseInt(prefix);
+  const start = ipToNumber(ip) & (~0 << mask);
+  const end = start + Math.pow(2, mask) - 1;
+  return { start, end };
+}
+
+function checkOverlap() {
+  const cidr1 = document.getElementById("cidr1").value.trim();
+  const cidr2 = document.getElementById("cidr2").value.trim();
+  const output = document.getElementById("output");
+
+  try {
+    const range1 = cidrToRange(cidr1);
+    const range2 = cidrToRange(cidr2);
+
+    const overlap =
+      range1.start <= range2.end &&
+      range2.start <= range1.end;
+
+    if (overlap) {
+      output.textContent = "❌ Conflict detected: CIDR ranges overlap.";
+    } else {
+      output.textContent = "✅ No conflict detected.";
+    }
+  } catch {
+    output.textContent = "Invalid CIDR format.";
+  }
+}
+</script>
+
+</body>
+</html>
