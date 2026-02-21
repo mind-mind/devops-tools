@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kubernetes Debug Command Builder</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="top-nav">
+      <a href="../index.html">← Back to Tools</a>
+    </div>
+
+    <h1>Kubernetes Debug Command Builder</h1>
+    <p class="subtitle">Generate real-world kubectl debugging commands instantly.</p>
+    <hr class="divider">
+
+    <h3>Logs Generator</h3>
+    <input id="logNamespace" placeholder="Namespace (optional)">
+    <input id="logPod" placeholder="Pod name">
+    <input id="logLabel" placeholder="Label selector (app=nginx)">
+    <input id="logContainer" placeholder="Container (optional)">
+    <label><input type="checkbox" id="followLogs"> Follow logs (-f)</label>
+    <label><input type="checkbox" id="previousLogs"> Previous logs (--previous)</label>
+
+    <button onclick="generateLogs()">Generate Logs Command</button>
+
+    <hr class="divider">
+
+    <h3>Port Forward</h3>
+    <select id="pfType">
+      <option value="pod">Pod</option>
+      <option value="svc">Service</option>
+    </select>
+    <input id="pfName" placeholder="Resource name">
+    <input id="pfLocal" type="number" placeholder="Local port">
+    <input id="pfTarget" type="number" placeholder="Target port">
+    <input id="pfNamespace" placeholder="Namespace (optional)">
+
+    <button onclick="generatePortForward()">Generate Port Forward</button>
+
+    <hr class="divider">
+
+    <h3>Exec Into First Pod by Label</h3>
+    <input id="execLabel" placeholder="Label selector">
+    <input id="execNamespace" placeholder="Namespace (optional)">
+    <select id="execShell">
+      <option value="/bin/sh">/bin/sh</option>
+      <option value="/bin/bash">/bin/bash</option>
+    </select>
+
+    <button onclick="generateExec()">Generate Exec Command</button>
+
+    <pre id="output"></pre>
+
+  </div>
+</div>
+
+<script>
+function generateLogs() {
+  const ns = logNamespace.value.trim()
+  const pod = logPod.value.trim()
+  const label = logLabel.value.trim()
+  const container = logContainer.value.trim()
+  const follow = followLogs.checked
+  const previous = previousLogs.checked
+  const output = document.getElementById("output")
+
+  if (!pod && !label) {
+    output.style.color = "#f87171"
+    output.textContent = "Provide Pod name OR Label selector."
+    return
+  }
+
+  let cmd = "kubectl logs "
+  cmd += pod ? pod : `-l ${label}`
+  if (container) cmd += ` -c ${container}`
+  if (follow) cmd += " -f"
+  if (previous) cmd += " --previous"
+  if (ns) cmd += ` -n ${ns}`
+
+  output.style.color = "#e2e8f0"
+  output.textContent = cmd
+}
+
+function generatePortForward() {
+  const type = pfType.value
+  const name = pfName.value.trim()
+  const local = pfLocal.value
+  const target = pfTarget.value
+  const ns = pfNamespace.value.trim()
+  const output = document.getElementById("output")
+
+  if (!name || !local || !target) {
+    output.style.color = "#f87171"
+    output.textContent = "Resource name and ports required."
+    return
+  }
+
+  let cmd = `kubectl port-forward ${type}/${name} ${local}:${target}`
+  if (ns) cmd += ` -n ${ns}`
+
+  output.style.color = "#e2e8f0"
+  output.textContent = cmd
+}
+
+function generateExec() {
+  const label = execLabel.value.trim()
+  const ns = execNamespace.value.trim()
+  const shell = execShell.value
+  const output = document.getElementById("output")
+
+  if (!label) {
+    output.style.color = "#f87171"
+    output.textContent = "Label selector required."
+    return
+  }
+
+  let cmd = `kubectl exec -it $(kubectl get pod -l ${label}`
+  if (ns) cmd += ` -n ${ns}`
+  cmd += ` -o jsonpath="{.items[0].metadata.name}") -- ${shell}`
+
+  output.style.color = "#e2e8f0"
+  output.textContent = cmd
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Kubectl Deployment Generator</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="top-nav">
+      <a href="../index.html">← Back to Tools</a>
+    </div>
+
+    <h1>Kubectl Deployment Generator</h1>
+    <p class="subtitle">Generate common deployment commands instantly.</p>
+    <hr class="divider">
+
+    <input id="name" placeholder="Deployment name">
+    <input id="image" placeholder="Container image">
+    <input id="replicas" type="number" placeholder="Replicas">
+
+    <button onclick="generate()">Generate Command</button>
+
+    <pre id="output"></pre>
+
+  </div>
+</div>
+
+<script>
+function generate() {
+  const name = document.getElementById("name").value.trim()
+  const image = document.getElementById("image").value.trim()
+  const replicas = document.getElementById("replicas").value.trim()
+  const output = document.getElementById("output")
+
+  if (!name || !image) {
+    output.textContent = "❌ Deployment name and image are required."
+    return
+  }
+
+  let cmd = `kubectl create deployment ${name} --image=${image}`
+
+  if (replicas) {
+    cmd += `\nkubectl scale deployment ${name} --replicas=${replicas}`
+  }
+
+  output.textContent = cmd
+}
+</script>
+
+</body>
+</html>

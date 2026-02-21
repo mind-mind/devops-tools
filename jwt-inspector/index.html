@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JWT Inspector</title>
+  <p class="subtitle">
+    Decode JWT tokens instantly. No data is stored.
+  </p>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="top-nav">
+      <a href="../index.html">← Back to Tools</a>
+    </div>
+
+    <h1>JWT Inspector</h1>
+    <hr class="divider">
+
+    <textarea id="jwtInput" rows="5" placeholder="Paste JWT here"></textarea>
+
+    <button onclick="decodeJWT()">Decode</button>
+
+    <pre id="output"></pre>
+
+  </div>
+</div>
+
+<script>
+function decodeJWT() {
+  const token = document.getElementById("jwtInput").value.trim()
+  const parts = token.split(".")
+
+  if (parts.length !== 3) {
+    document.getElementById("output").textContent = "Invalid JWT format"
+    return
+  }
+
+  try {
+    const header = JSON.parse(atob(parts[0]))
+    const payload = JSON.parse(atob(parts[1]))
+
+    document.getElementById("output").textContent =
+      "Header:\n" + JSON.stringify(header, null, 2) +
+      "\n\nPayload:\n" + JSON.stringify(payload, null, 2)
+
+  } catch {
+    document.getElementById("output").textContent = "Invalid JWT"
+  }
+}
+</script>
+
+</body>
+</html>

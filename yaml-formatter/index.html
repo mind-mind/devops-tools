@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>YAML Formatter</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+
+    <div class="top-nav">
+      <a href="../index.html">← Back to Tools</a>
+    </div>
+
+    <h1>YAML Formatter & Validator</h1>
+    <p class="subtitle">Format and validate YAML instantly. No data is stored.</p>
+    <hr class="divider">
+
+    <textarea id="yamlInput" rows="12" placeholder="Paste YAML here"></textarea>
+
+    <button onclick="formatYAML()">Format YAML</button>
+
+    <pre id="output"></pre>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
+<script>
+function formatYAML() {
+  const input = document.getElementById("yamlInput").value
+  const output = document.getElementById("output")
+
+  try {
+    const parsed = jsyaml.load(input)
+    output.style.color = "#e2e8f0"
+    output.textContent = jsyaml.dump(parsed)
+  } catch (e) {
+    output.style.color = "#f87171"
+    output.textContent = "Invalid YAML:\n" + e.message
+  }
+}
+</script>
+
+</body>
+</html>
