@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/</loc>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/cidr-checker/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/debug-helper/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/jwt-inspector/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/kubectl-generator/</loc>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://devops-tools.minddreamer.online/yaml-formatter/</loc>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
