@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-      "start": "serve -s . -l 3000"
+      "start": "serve -s . -l 3000",
+      "build-sitemap": "node generate-sitemap.js"
     },
     "dependencies": {
       "serve": "^14.2.0"

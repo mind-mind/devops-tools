@@ -6,6 +6,12 @@
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://devops-tools.minddreamer.online/.git/</loc>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://devops-tools.minddreamer.online/cidr-checker/</loc>
     <priority>0.8</priority>
@@ -30,5 +36,6 @@
     <loc>https://devops-tools.minddreamer.online/yaml-formatter/</loc>
     <priority>0.8</priority>
   </url>
+
 
 </urlset>
