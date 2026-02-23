@@ -1,52 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>MindOps DevOps Tools</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>MindOps DevOps Tools | Free Online Utilities</title>
+  <meta name="description" content="Free online DevOps utilities including YAML formatter, JWT inspector, kubectl generator, CIDR checker, secret sealer and Kubernetes debugging tools." />
+
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
-<div class="container">
-  <div class="card">
+  <main class="container">
+    <section class="card">
 
-    <h1>🛠 MindOps DevOps Tools</h1>
-    <p class="subtitle">
-      Free online utilities for DevOps engineers.
-    </p>
-    <hr class="divider">
+      <header class="header">
+        <h1>🛠 MindOps DevOps Tools</h1>
+        <p class="subtitle">
+          Practical, no-login utilities built for real-world DevOps workflows.
+        </p>
+      </header>
 
-    <div class="tool-grid">
+      <hr class="divider" />
 
-      <a class="tool-card" href="yaml-formatter/">
-        <h2>YAML Formatter</h2>
-        <p>Format and validate Kubernetes & CI/CD YAML.</p>
-      </a>
+      <section class="tool-grid">
 
-      <a class="tool-card" href="jwt-inspector/">
-        <h2>JWT Inspector</h2>
-        <p>Decode and inspect JWT tokens instantly.</p>
-      </a>
+        <a class="tool-card" href="yaml-formatter/" aria-label="YAML Formatter Tool">
+          <h2>YAML Formatter</h2>
+          <p>Format, validate, and clean Kubernetes & CI/CD YAML files.</p>
+        </a>
 
-      <a class="tool-card" href="kubectl-generator/">
-        <h2>Kubectl Command Generator</h2>
-        <p>Generate common kubectl deployment commands.</p>
-      </a>
+        <a class="tool-card" href="jwt-inspector/" aria-label="JWT Inspector Tool">
+          <h2>JWT Inspector</h2>
+          <p>Decode and inspect JWT tokens securely in your browser.</p>
+        </a>
 
-      <a class="tool-card" href="debug-helper/">
-        <h2>Kubernetes Debug Builder</h2>
-        <p>Generate real-world kubectl debugging commands.</p>
-      </a>
+        <a class="tool-card" href="kubectl-generator/" aria-label="Kubectl Command Generator Tool">
+          <h2>Kubectl Command Generator</h2>
+          <p>Generate commonly used kubectl deployment and troubleshooting commands.</p>
+        </a>
 
-      <a class="tool-card" href="cidr-checker/">
-        <h2>CIDR Checker</h2>
-        <p>Check conflict VPC Range.</p>
-      </a>
+        <a class="tool-card" href="debug-helper/" aria-label="Kubernetes Debug Builder Tool">
+          <h2>Kubernetes Debug Builder</h2>
+          <p>Build real-world kubectl debugging commands for production incidents.</p>
+        </a>
 
-    </div>
+        <a class="tool-card" href="cidr-checker/" aria-label="CIDR Checker Tool">
+          <h2>CIDR Checker</h2>
+          <p>Detect CIDR overlaps and VPC range conflicts instantly.</p>
+        </a>
 
-  </div>
-</div>
+        <!-- ✅ NEW TOOL -->
+        <a class="tool-card" href="sealer/" aria-label="Secret Sealer Tool">
+          <h2>Secret Sealer</h2>
+          <p>Encrypt and decrypt sensitive values locally using AES-256 (client-side only).</p>
+        </a>
+
+      </section>
+
+    </section>
+  </main>
 
 </body>
 </html>
