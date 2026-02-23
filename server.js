@@ -5,7 +5,11 @@ const fs = require("fs");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname)));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "index.html"));
+});
 
 app.get("/sitemap.xml", (req, res) => {
   const baseUrl = "https://devops-tools.minddreamer.online";
