@@ -89,6 +89,20 @@
       text-align: center;
       margin-top: 10px;
     }
+    .top-nav {
+      margin-bottom: 20px;
+    }
+
+    .top-nav a {
+      color: #60a5fa;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s ease;
+    }
+
+    .top-nav a:hover {
+      color: #93c5fd;
+    }
   </style>
 </head>
 
@@ -97,6 +111,9 @@
   <div class="sealer-container">
     <h1>🔐 Secret Sealer</h1>
     <p>Encrypt and decrypt secrets locally using AES-256 (nothing is sent to a server).</p>
+    <div class="top-nav">
+      <a href="../index.html">← Back to Tools</a>
+    </div>
 
     <textarea id="secretInput" placeholder="Paste secret or encrypted value here"></textarea>
 
